@@ -1,0 +1,125 @@
+.mv {
+    position: relative;
+    background-image: radial-gradient($color-black, $color-blue);
+
+    &__canvas {
+        position: relative;
+        opacity: 0;
+        z-index: $z1;
+    }
+    &__title {
+        position: absolute;
+        top: 50%;
+        left: 70%;
+        transform: translate(-50%, -50%);
+        @include sp {
+            top: get_vw_sp(110);
+            left: 36%;
+        }
+    }
+    &__inner {
+        text-align: left;
+        font-size: get_vw(45);
+        line-height: 1.2;
+        @include sp {
+            font-size: get_vw_sp(25);
+        }
+    }
+
+    &__text {
+        display: inline-block;
+        font-family: $font-all;
+        color: $color-white;
+        opacity: 0;
+        @include sp {
+            font-size: get_vw_sp(18);
+        }
+        &.is-active {
+            animation: textAnimate 0.5s ease-out forwards;
+        }
+        &:nth-child(2n) {
+            animation-delay: 0.55s;
+        }
+        &:nth-child(3n + 1) {
+            animation-delay: 0.15s;
+        }
+        &:nth-child(2n + 1) {
+            animation-delay: 0.35s;
+        }
+    }
+
+    &__wrapper {
+        overflow: hidden;
+        margin: 0 0 get_vw(20);
+        @include sp {
+            margin: 0 0 get_vw_sp(10);
+        }
+    }
+
+    &__heading {
+        display: inline-block;
+        transform: translate3d(0, 100%, 0);
+        font-size: get_vw(25);
+        font-family: $font-all;
+        color: $color-white;
+        @include sp {
+            font-size: get_vw_sp(20);
+        }
+    }
+
+    &__links {
+        position: absolute;
+        top: 90%;
+        left: 78%;
+        transform: translate(-50%, -50%);
+        z-index: $z5;
+        @include sp {
+            top: get_vw_sp(210);
+            left: 32%;
+        }
+    }
+    &__link {
+        display: inline-block;
+        color: $color-white;
+        font-family: $font-all;
+        font-size: get_vw(25);
+        transform: translate3d(0, 100%, 0);
+        margin: 0 get_vw(10) 0 0;
+        transition: $easeCustom1 0.6s;
+        text-decoration: none;
+        &:nth-child(1) {
+            margin: get_vw(10) get_vw(10) 0 0;
+            @include sp {
+                margin: get_vw_sp(5) get_vw_sp(5) 0 0;
+            }
+        }
+        @include sp {
+            font-size: get_vw_sp(20);
+            margin: 0 get_vw_sp(5) 0 0;
+        }
+        &::after {
+            content: attr(data-hover);
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            transform: rotateX(90deg);
+            transition: $easeCustom1 0.3s;
+            opacity: 0;
+            color: $color-light-blue;
+            height: 0;
+        }
+        &:hover {
+            color: transparent;
+
+            &::after {
+                transform: rotateX(0deg);
+                top: 0;
+                opacity: 1;
+                height: 100%;
+            }
+        }
+        &:visited {
+            text-decoration: none;
+        }
+    }
+}

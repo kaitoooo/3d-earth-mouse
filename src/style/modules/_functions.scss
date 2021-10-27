@@ -1,0 +1,20 @@
+// vwの取得($size:表示したいpxを指定、$pc-base-size:variable.scssに指定)
+@function get_vw($size, $viewport: $pc-base-size) {
+    $rate: 100 / $viewport;
+    @return $rate * $size * 1vw;
+}
+
+// vwの取得($size:表示したいpxを指定、$pc-base-size:variable.scssに指定)
+@function get_vw_sp($size, $viewport: $sp-base-size) {
+    $rate: 100 / $viewport;
+    @return $rate * $size * 1vw;
+}
+// %の取得
+@function get_per($size, $parent: $pc-base-size) {
+    @return $size / $parent * 100%;
+}
+
+// %の取得
+@function get_per_sp($size, $parent: $sp-base-size) {
+    @return $size / $parent * 100%;
+}
