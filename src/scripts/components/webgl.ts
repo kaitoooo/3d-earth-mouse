@@ -14,7 +14,6 @@ export default class WebGL {
     elmsAll: {
         [s: string]: NodeListOf<HTMLElement>;
     };
-    addClass: string;
     dpr: number;
     three: {
         scene: THREE.Scene;
@@ -29,9 +28,9 @@ export default class WebGL {
         jupiter: THREE.Mesh;
         saturn: THREE.Mesh;
         torus: THREE.Mesh;
-        particleSystem: any;
-        geometry: any;
-        particles: any;
+        particleSystem: THREE.Points;
+        geometry: THREE.BufferGeometry | null;
+        particles: number;
     };
     mousePos: {
         x: number;
@@ -67,7 +66,6 @@ export default class WebGL {
         this.elmsAll = {
             mvText: document.querySelectorAll('.mv__text'),
         };
-        this.addClass = 'is-active';
         // デバイスピクセル比(最大値=2)
         this.dpr = Math.min(window.devicePixelRatio, 2);
         this.three = {
@@ -137,7 +135,6 @@ export default class WebGL {
     initCamera(): void {
         // カメラを作成(視野角, スペクト比, near, far)
         this.three.camera = new THREE.PerspectiveCamera(this.three.cameraFov, this.winSize.wd / this.winSize.wh, this.three.cameraAspect, 1000);
-        // this.three.camera.position.set(80, 0, 300);
         this.three.camera.position.set(this.sp ? 0 : 80, 0, this.sp ? 600 : 300);
         this.three.camera.lookAt(new THREE.Vector3(0, 0, 0));
     }
@@ -182,7 +179,6 @@ export default class WebGL {
             uniforms: uniforms,
             vertexShader: vertexShader,
             fragmentShader: fragmentShader,
-
             blending: THREE.AdditiveBlending,
             depthTest: false,
             transparent: true,
@@ -294,8 +290,6 @@ export default class WebGL {
             this.three.saturn.position.set(-100, 100, 0);
             this.three.scene.add(this.three.saturn);
         });
-
-        //     // data.scale.set(this.sp ? 0.1 : 0.8, this.sp ? 0.1 : 0.8, this.sp ? 0.1 : 0.8);
     }
     rendering(): void {
         const time = Date.now() * 0.005;
